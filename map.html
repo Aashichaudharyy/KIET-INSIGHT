@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Map with Pointer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+    }
+
+    .map-container {
+        position: relative;
+        width: 567px;
+        height: 1000px;
+    }
+
+    /* Map image */
+    .map-image {
+        width: 100%;
+        height: 100%;
+        border: 2px solid #ccc;
+    }
+
+    /* Pointer (Clickable area) */
+    .audipointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 150px;  /* Adjust to position it on the map */
+        left: 250px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Dblockpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 480px;  /* Adjust to position it on the map */
+        left: 470px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Gblockpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 450px;  /* Adjust to position it on the map */
+        left: 300px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+
+    .Bblockpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 450px;  /* Adjust to position it on the map */
+        left: 390px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Hblockpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 550px;  /* Adjust to position it on the map */
+        left: 390px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .ICDTpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 580px;  /* Adjust to position it on the map */
+        left: 440px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Ablockpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 705px;  /* Adjust to position it on the map */
+        left: 440px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .MPCpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 200px;  /* Adjust to position it on the map */
+        left: 410px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .CVpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 480px;  /* Adjust to position it on the map */
+        left: 230px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .CGpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 500px;  /* Adjust to position it on the map */
+        left: 210px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Tagorepointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 270px;  /* Adjust to position it on the map */
+        left: 410px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Aryabhattpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 200px;  /* Adjust to position it on the map */
+        left: 380px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .GHpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 270px;  /* Adjust to position it on the map */
+        left: 110px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Templepointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 235px;  /* Adjust to position it on the map */
+        left: 260px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Templegroundpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 205px;  /* Adjust to position it on the map */
+        left: 230px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Badmintoncourtpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 150px;  /* Adjust to position it on the map */
+        left: 200px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Lawntennispointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 150px;  /* Adjust to position it on the map */
+        left: 180px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Cblockpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 400px;  /* Adjust to position it on the map */
+        left: 500px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Pharmacypointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 120px;  /* Adjust to position it on the map */
+        left: 480px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .BTpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 190px;  /* Adjust to position it on the map */
+        left: 445px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Cafeteriapointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 580px;  /* Adjust to position it on the map */
+        left: 490px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .HHpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 330px;  /* Adjust to position it on the map */
+        left: 340px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Librarypointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 660px;  /* Adjust to position it on the map */
+        left: 470px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Hungrypointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 630px;  /* Adjust to position it on the map */
+        left: 510px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Centrespointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 650px;  /* Adjust to position it on the map */
+        left: 390px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+    .Eblockpointer img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        top: 350px;  /* Adjust to position it on the map */
+        left: 390px; /* Adjust to position it on the map */
+        transform: translate(-50%, -50%);
+    }
+
+
+    /* Popup style (hidden by default) */
+    .popup {
+        display: none;
+        position: absolute;
+        top: 120px;  /* Adjust popup position */
+        left: 240px; /* Adjust popup position */
+        padding: 20px;
+        background-color: white;
+        border: 2px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 600px;
+        z-index: 2;
+        align-items: center;
+    }
+
+    /* Close button in the popup */
+    .close-btn {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    /* Overlay background when popup is visible */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+</style>
+</head>
+<body>
+
+<div class="map-container">
+    <!-- The map image -->
+    <img src="/Images/Kiet Map.png" alt="Map" class="map-image">
+    
+    <!-- The clickable pointer -->
+    <div class="audipointer" onclick="showPopup('Audi')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Audi">
+        <img src="/Images/audi.jpg" alt="Auditorium">
+        <h2>AUDITORIUM</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+    
+    <div class="Gblockpointer" onclick="showPopup('Gblock')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <div class="popup" id="popup-Gblock">
+        <img src="/Images/Gblock.jpg" alt="G-Block" width="400px">
+        <h2>G-Block</h2>
+        <h4>IT,CSIT</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+
+    <div class="Dblockpointer" onclick="showPopup('Dblock')"><img src="/Images/pointer.png" alt="pointer"></div>
+    
+    <div class="popup" id="popup-Dblock">
+    <img src="/Images/Dblock.jpg" alt="D-block" width="400px">
+    <h2>D Block</h2>
+    <h4>EEE, ELCE</h4>
+    <button class="close-btn"onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Bblockpointer" onclick="showPopup('Bblock')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Bblock">
+        <img src="/Images/Bblock.jpg" alt="B Block" width="400px">
+        <h2>B Block</h2>
+        <h4>ECE</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Hblockpointer" onclick="showPopup('Hblock')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Hblock">
+        <img src="/Images/Hblock.jpg" alt="H Block" width="450px">
+        <h2>H Block</h2>
+        <h4>CSE AI&ML, CSE AI</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Eblockpointer" onclick="showPopup('Eblock')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Eblock">
+        <img src="/Images/Eblock.jpg" alt="E Block" width="400px">
+        <h2>E Block</h2>
+        <h3>CSE, CS</h3>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="ICDTpointer" onclick="showPopup('IC&DT')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup-IC&DT">
+        <img src="/Images/IC&DT.jpg" alt="Innovation Center and Drone Technology" width="600px">
+        <h2>Innovation Centre and Drone Technology</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Ablockpointer" onclick="showPopup('Ablock')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Ablock">
+        <img src="/Images/Ablock1.jpg" alt="A-Block" width="400px">
+        <h2>A-Block</h2>
+        <h4>Reception</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="MPCpointer" onclick="showPopup('MPC')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-MPC">
+        <img src="/Images/MPC.jpg" alt="MPC" width="500px">
+        <h2>MPC</h2>
+        <h4>Sports Office,Shopping Centre,XEROX Station,Shooting Range,Carrom Room,Chess Room,Chess Room,Billiards Room,Table Tennis,Gymnasium(Boys)</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="CVpointer" onclick="showPopup('CV')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup-CV">
+        <img src="/Images/CV.jpg" alt="CV Raman" width="400px">
+        <h2>CV Raman</h2> 
+        <h4>Boys Hostel</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="CGpointer" onclick="showPopup('Chandragupta')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Chandragupta">
+        <img src="/Images/CG.jpg" alt="Chandragupta" width="400px">
+        <h2>Chandragupta</h2>
+        <h4>Boys Hostel</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Tagorepointer" onclick="showPopup('Tagore')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Tagore">
+        <img src="/Images/Tagore.jpg" alt="Tagore Hostel" width="400px">
+        <h2>Tagore Hostel</h2>
+        <h4>Boy's Hostel</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Aryabhattpointer" onclick="showPopup('Aryabhatt')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Aryabhatt">
+        <img src="/Images/Aryabhatt.jpg" alt="Aryabhatt" width="400px">
+        <h2>Aryabhatt Hostel</h2> 
+        <h4>Boys Hostel</h4>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="GHpointer" onclick="showPopup('Girls Hostel')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Girls Hostel">
+        <img src="/Images/GH.jpg" alt="Girls Hostel" width="400px">
+        <h2>Girls Hostel</h2> 
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Templepointer" onclick="showPopup('Temple')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Temple">
+        <img src="/Images/Temple.jpg" alt="Temple" width="400px">
+        <h2>Temple</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Templegroundpointer" onclick="showPopup('Templeground')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Templeground">
+        <img src="/Images/Templeground.jpg" alt="Temple Ground" width="400px">
+        <h2>Temple Ground</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+
+    <div class="Badmintoncourtpointer" onclick="showPopup('Badmintoncourt')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Badmintoncourt">
+        <img src="/Images/Badmintoncourt.jpg" alt="Badminton Court" width="400px">
+        <h2>Badminton Court</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="Lawntennispointer" onclick="showPopup('Lawntennis')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+
+    <!-- Popup -->
+    <div class="popup" id="popup-Lawntennis">
+        <img src="/Images/Lawntennis.jpg" alt="Lawn Tennis Court" width="400px">
+        <h2>Lawn Tennis Court</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+
+
+<div class="Pharmacypointer" onclick="showPopup('Pharmacy')"><img src="/Images/pointer.png" alt="pointer"></div>
+<div class="popup" id="popup-Pharmacy">
+    <img src="/Images/Pharmacy.jpg" alt="KIET School of Pharmacy" width="400px">
+    <h2>KIET School of Pharmacy</h2>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<div class="BTpointer" onclick="showPopup('BT')"><img src="/Images/pointer.png" alt="pointer"></div>
+<div class="popup" id="popup-BT">
+    <img src="/Images/BT.jpg" alt="Big Treat Cafe" width="400px">
+    <h2>Big Treat Cafe (BT)</h2>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<div class="Cafeteriapointer" onclick="showPopup('Cafeteria')"><img src="/Images/pointer.png" alt="pointer"></div>
+<div class="popup" id="popup-Cafeteria">
+    <img src="/Images/Cafeteria.jpg" alt="Green Chilli Cafe" width="400px">
+    <h2>Green Chilli Cafe</h2>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<div class="HHpointer" onclick="showPopup('HH')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+<div class="popup" id="popup-HH">
+    <img src="/Images/HH.jpg" alt="The Healthy Hut" width="400px">
+    <h2>The Healthy Hut</h2>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<div class="Librarypointer" onclick="showPopup('Library')"><img src="/Images/pointer.png" alt="pointer"></div>
+
+<div class="popup" id="popup-Library">
+    <img src="/Images/Library.jpg" alt="Central Library" width="400px">
+    <h2>Central Library</h2>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<div class="Hungrypointer" onclick="showPopup('Hungry')"><img src="/Images/pointer.png" alt="pointer"></div>
+<div class="popup" id="popup-Hungry">
+    <img src="/Images/Hungry.jpg" alt="Hungry Nites" width="400px">
+    <h2>Hungry Nites Cafe</h2>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<div class="Centrespointer" onclick="showPopup('Centres')"><img src="/Images/pointer.png" alt="pointer"></div>
+<div class="popup" id="popup-Centres">
+    <img src="/Images/Centres.jpg" alt="Centres" width="400px">
+    <h2>Centre for Advanced Woodworking & Centre for Automotive Mechatronics</h2>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+
+<script>
+    function showPopup(popupId) {
+      // Hide all popups first
+        const popups = document.querySelectorAll('.popup');
+        popups.forEach(popup => popup.style.display = 'none');
+
+      // Show the specific popup
+        document.getElementById(`popup-${popupId}`).style.display = 'block';
+
+      // Show the overlay
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    // Function to close the popup and overlay
+    function closePopup() {
+        const popups = document.querySelectorAll('.popup');
+        popups.forEach(popup => popup.style.display = 'none');
+        document.getElementById('overlay').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

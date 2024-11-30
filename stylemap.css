@@ -1,0 +1,10 @@
+body{
+    overflow-x: hidden;
+    align-items: center;
+}
+
+.map{
+    max-width: 100%;
+    margin: 0;
+    align-items: center;
+}
